@@ -7,13 +7,13 @@ var connection = mysql.createConnection({
   // my username
   user: "root",
   // my password
-  password: 
+  password: "",
   database: "bamazon"
 });
 
 connection.connect(function(err) {
   if (err) throw (err);
-    console.log("connected as id" + connection.threadId);
+    // console.log("connected as id" + connection.threadId);
     displayItems();
 });
 
@@ -73,17 +73,18 @@ function itemOrder(){
         else {
           console.log("The item you have selected is: " + res[0].product_name +
           " with QTY: " + answer.qty);
-          updateQty(answer.qty, answer.itemID, res[0].stock_quantity);
+          updateQty(answer.itemID, res[0].stock_quantity, answer.qty);
           console.log("Your total comes out to $" + (res[0].price * answer.qty).toFixed(2) + ".");
         }
       });
     }); 
 }
 
-function updateQty(qty, id, stock){
+function updateQty(id, stock, qty){
   connection.query("UPDATE products SET? WHERE ?", [{stock_quantity: (stock-qty)}, {item_id: id}], function (err, res){
     if (err) throw (err);
-    console.log("Thank you for your purchase!");
+    console.log("Thank you for your purchase!" +
+    "\n-------------------------------------------------------------------------");
     connection.end();
   });
 }

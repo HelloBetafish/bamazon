@@ -25,3 +25,8 @@ VALUES ("Awesome Book", "Books", 29.47, 50),
 ("Bamazon Tie", "Clothing", 9.50, 100),
 ("Batteries", "Electronics", 4.99, 500),
 ("32GB MicroSD Card", "Electronics", 15.89, 50);
+
+UPDATE products SET stock_quantity = 50 WHERE item_id = 1;
+
+USE bamazon;
+SELECT item_id, product_name, stock_quantity FROM products WHERE stock_quantity < 5;
