@@ -62,7 +62,7 @@ function itemOrder(){
       }
     ])
     .then(function(answer) {
-      connection.query("SELECT item_id, product_name, price, stock_quantity FROM products WHERE ?", {item_id : answer.itemID}, function(err, res) {
+      connection.query("SELECT item_id, product_name, price, stock_quantity, product_sales FROM products WHERE ?", {item_id : answer.itemID}, function(err, res) {
         if (err) throw (err);
 
         if (answer.qty > res[0].stock_quantity) {
@@ -71,21 +71,31 @@ function itemOrder(){
         }
     
         else {
+          var purchaseTotal = (res[0].price * answer.qty).toFixed(2);
           console.log("The item you have selected is: " + res[0].product_name +
           " with QTY: " + answer.qty);
           updateQty(answer.itemID, res[0].stock_quantity, answer.qty);
-          console.log("Your total comes out to $" + (res[0].price * answer.qty).toFixed(2) + ".");
+          console.log("Your total comes out to $" + purchaseTotal + ".");
+          updateTotalSales(answer.itemID, res[0].product_sales, purchaseTotal);
         }
       });
     }); 
 }
 
-function updateQty(id, stock, qty){
+function updateQty(id, stock, qty, sale){
   connection.query("UPDATE products SET? WHERE ?", [{stock_quantity: (stock-qty)}, {item_id: id}], function (err, res){
     if (err) throw (err);
     console.log("Thank you for your purchase!" +
     "\n-------------------------------------------------------------------------");
-    connection.end();
   });
 }
 
+function updateTotalSales(id, pSales, purchase){
+    var total = (parseFloat(pSales) + parseFloat(purchase)).toFixed(2);
+    connection.query("UPDATE products SET? WHERE ?", [{product_sales: (total)}, {item_id: id}], function (err, res){
+    if (err) throw (err);
+    console.log(res.affectedRows + " product updated!\n" +
+    "\n-------------------------------------------------------------------------");
+    connection.end();
+  });
+}
