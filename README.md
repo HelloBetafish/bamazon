@@ -1,14 +1,12 @@
 # bamazon
 
-One Paragraph of project description goes here
-
 ## Overview
 
-Bamazon is an Amazon-like storefront using MySQL as database. The app uses node.js to take in orders from customers and deplete stock from the store's inventory. Users with a Manager or Supervisor roles can update inventory, products, and departments in the database directly from the app. The app can also track product sales across the store's departments and provide a summary of the highest-grossing departments in the store.
+Bamazon is an Amazon-like storefront using MySQL as database. The app uses Node.js to take in orders from customers and deplete stock from the store's inventory. Users with a Manager or Supervisor role can update inventory, products, and departments in the database directly from the app. The app can also track product sales across the store's departments and provide a summary of the highest-grossing departments in the store.
 
 ### Requirements
 
-The app is run on Node.js and requires that this be installed on your computer.  You will also need some node packages. All the details for the required node packages are stored in the package.json file. Use the CLI and type in the code below to install them.
+The app is run on Node.js and requires that this be installed on your computer.  You will also need to install a few node packages. All the details for the required node packages are stored in the package.json file. Use the CLI and type in the code below to install them.
 
 ```
 npm install
@@ -18,7 +16,7 @@ npm install
 
 Running the bamazonCustomer.js file will give you the Customer view, which allows you to view all inventory in the database and make a selection for purchase. Stock and product sales will be automatically updated once a purchase is made.
 
-![Product View](images/View_Products.jpg)
+![Product View](images/View_Products.JPG)
 
 ### Manager View
 
@@ -26,19 +24,19 @@ Running the bamazonManager.js file will give you the Manager view, which include
 
 * View Products for Sale
 
-![Product View](images/View_Products.jpg)
+![Product View](images/View_Products.JPG)
 
 * View Low Inventory
 
-![Low Inventory](images/Manager_LowInv.jpg)
+![Low Inventory](images/Manager_LowInv.JPG)
 
 * Add to Inventory
 
-![Add Inventory](images/Manager_UpdateInv.jpg)
+![Add Inventory](images/Manager_UpdateInv.JPG)
 
 * Add New Product
 
-![Add New Product](images/Manager_AddProduct.jpg)
+![Add New Product](images/Manager_AddProduct.JPG)
 
 ### Supervisor View
 
@@ -46,11 +44,11 @@ Running the bamazonSupervisor.js file will give you the Supervisor view, which i
 
 * View Product Sales by Department
 
-![Product Sales](images/Supervisor_ProductSales.jpg)
+![Product Sales](images/Supervisor_ProductSales.JPG)
 
 * Create New Department
 
-![New Department](images/Supervisor_CreateDept.jpg)
+![New Department](images/Supervisor_CreateDept.JPG)
 
 ### Video demo
 
