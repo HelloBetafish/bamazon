@@ -198,7 +198,8 @@ function addProduct() {
         product_name: answer.name,
         department_name: answer.department,
         price: answer.price,
-        stock_quantity: answer.inventory
+        stock_quantity: answer.inventory,
+        product_sales: 0
       },
       function(err, res){
         if (err) throw (err);

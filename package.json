@@ -4,6 +4,7 @@
   "description": "node app for store front",
   "main": "bamazonCustomer.js",
   "dependencies": {
+    "cli-table2": "^0.2.0",
     "inquirer": "^3.3.0",
     "mysql": "^2.14.1"
   },

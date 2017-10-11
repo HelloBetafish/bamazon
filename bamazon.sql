@@ -1,3 +1,13 @@
+USE bamazon;
+SELECT * FROM products;
+SELECT * FROM departments;
+
+
+
+
+
+
+
 DROP DATABASE IF EXISTS bamazon;
 CREATE database bamazon;
 USE bamazon;
@@ -12,13 +22,13 @@ PRIMARY KEY(item_id)
 );
 
 ALTER TABLE products 
-MODIFY product_sales DECIMAL(10,2);
+ADD product_sales DECIMAL(10,2);
 SELECT * FROM products;
 
 USE bamazon;
 UPDATE products
-SET product_sales = 10000
-WHERE item_id = 12;
+SET product_sales = 1000
+WHERE item_id = 13;
 SELECT * FROM products;
 
 USE bamazon;
@@ -40,6 +50,10 @@ USE bamazon;
 SELECT item_id, product_name, stock_quantity FROM products WHERE stock_quantity < 10;
 
 USE bamazon;
+ALTER TABLE departments 
+ADD product_sales DECIMAL(10,2);
+SELECT * FROM products;
+
 
 CREATE TABLE departments(
 department_id int NOT NULL auto_increment,
@@ -50,10 +64,21 @@ PRIMARY KEY(department_id)
 
 USE bamazon;
 INSERT INTO departments (department_name, over_head_costs)
-VALUES ("Books", 10000),
-("Accessories", 10000), 
-("Pantry", 10000),
-("Clothing", 10000),
-("Electronics", 10000);
+VALUES ("Books", 1000),
+("Accessories", 1000), 
+("Pantry", 1000),
+("Clothing", 1000),
+("Electronics", 1000);
 
-SELECT * FROM departments;
+
+
+
+
+
+USE bamazon;
+SELECT departments.department_id, departments.department_name,
+departments.over_head_costs, products.product_sales, (products.product_sales - departments.over_head_costs) total_profit
+FROM departments
+INNER JOIN products ON departments.department_name = products.department_name
+GROUP BY department_id;
+

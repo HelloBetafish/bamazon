@@ -1,5 +1,14 @@
 var mysql = require("mysql");
 var inquirer = require("inquirer");
+var Table = require("cli-table2");
+
+var table = new Table({
+  head: ['department_id', "department_name", "overhead_costs", "product_sales", "total_profit"],
+  chars: { 'top': '═' , 'top-mid': '╤' , 'top-left': '╔' , 'top-right': '╗'
+         , 'bottom': '═' , 'bottom-mid': '╧' , 'bottom-left': '╚' , 'bottom-right': '╝'
+         , 'left': '║' , 'left-mid': '╟' , 'mid': '─' , 'mid-mid': '┼'
+         , 'right': '║' , 'right-mid': '╢' , 'middle': '│' }
+});
 
 var connection = mysql.createConnection({
   host: "localhost",
@@ -40,9 +49,22 @@ function listOptions() {
     });
 }
 
+// I need to fix the sum on product_sales column, it is not showing correctly when I group rows.
+// However, the total_profit is correct
+
 function viewProductSales() {
- console.log("in progress");
- connection.end();
+  connection.query("SELECT departments.department_id, departments.department_name, departments.over_head_costs," +
+    " products.product_sales, SUM(products.product_sales - departments.over_head_costs) total_profit" +
+    " FROM departments INNER JOIN products ON departments.department_name = products.department_name GROUP BY department_id", function(err, res) {
+      if (err) throw err;
+      for (i = 0; i < res.length ; i++){
+        table.push(
+         [res[i].department_id, res[i].department_name, res[i].over_head_costs, res[i].product_sales, res[i].total_profit]
+        );
+      }
+      console.log(table.toString());
+      connection.end();
+  });
 }
 
 function createNewDept() {
@@ -83,7 +105,7 @@ function createNewDept() {
       },
       function(err, res){
         if (err) throw (err);
-        console.log(res.affectedRows + " product successfully added!\n");
+        console.log(res.affectedRows + " department successfully added!\n");
         connection.end();
       });
     });
