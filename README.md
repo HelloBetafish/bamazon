@@ -18,6 +18,8 @@ Running the bamazonCustomer.js file will give you the Customer view, which allow
 
 ![Product View](images/View_Products.JPG)
 
+![Product View](images/Cust_Purchase.JPG)
+
 ### Manager View
 
 Running the bamazonManager.js file will give you the Manager view, which includes 4 options:
