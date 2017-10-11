@@ -6,7 +6,7 @@ Bamazon is an Amazon-like storefront using MySQL as database. The app uses Node.
 
 ### Requirements
 
-The app is run on Node.js and requires that this be installed on your computer.  You will also need to install a few node packages. All the details for the required node packages are stored in the package.json file. Use the CLI and type in the code below to install them.
+Bamazon is run on Node.js and requires that this be installed on your computer.  You will also need to install a few node packages. All the details for the required node packages are stored in the package.json file. Use the CLI and type in the code below to install them.
 
 ```
 npm install
