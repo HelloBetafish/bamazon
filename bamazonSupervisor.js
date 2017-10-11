@@ -55,7 +55,8 @@ function listOptions() {
 function viewProductSales() {
   connection.query("SELECT departments.department_id, departments.department_name, departments.over_head_costs," +
     " products.product_sales, SUM(products.product_sales - departments.over_head_costs) total_profit" +
-    " FROM departments INNER JOIN products ON departments.department_name = products.department_name GROUP BY department_id", function(err, res) {
+    " FROM departments INNER JOIN products ON departments.department_name = products.department_name GROUP BY department_id" +
+    " ORDER BY total_profit DESC", function(err, res) {
       if (err) throw err;
       for (i = 0; i < res.length ; i++){
         table.push(
